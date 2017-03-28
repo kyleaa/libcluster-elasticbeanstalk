@@ -10,7 +10,7 @@ defmodule PresenceChat do
       # Start the endpoint when the application starts
       supervisor(PresenceChat.Endpoint, []),
       # Start the Ecto repository
-      supervisor(PresenceChat.Repo, []),
+      # supervisor(PresenceChat.Repo, []),
       supervisor(PresenceChat.Presence, []),
 
     ]
