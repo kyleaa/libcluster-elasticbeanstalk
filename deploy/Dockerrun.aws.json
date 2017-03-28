@@ -1,0 +1,50 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "nginx-proxy-conf",
+      "host": {
+        "sourcePath": "/var/app/current/proxy/conf.d"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "nginx",
+      "image": "nginx",
+      "essential": true,
+      "memory": 128,
+      "links": ["phoenix"],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "nginx-proxy-conf",
+          "containerPath": "/etc/nginx/conf.d",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "name": "phoenix",
+      "image": "946170473186.dkr.ecr.us-east-1.amazonaws.com/libcluster:latest",
+      "environment": ["PHOENIX_HOST"],
+      "essential": true,
+      "memory": 4096,
+      "portMappings": [
+        {
+          "hostPort": 4369,
+          "containerPort": 4369
+        },
+        {
+          "hostPort": 8174,
+          "containerPort": 8174
+        }
+      ]
+    }
+  ]
+}
