@@ -4,22 +4,20 @@ defmodule PresenceChat.Mixfile do
   def project do
     [app: :presence_chat,
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.4",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application.
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {PresenceChat, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :phoenix_pubsub]]
+    [mod: {PresenceChat, []}]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,7 +35,10 @@ defmodule PresenceChat.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:libcluster, "~> 2.0.3"},
+     {:libcluster_ec2, git: "https://www.github.com/kyleaa/libcluster_ec2"}
+    ]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

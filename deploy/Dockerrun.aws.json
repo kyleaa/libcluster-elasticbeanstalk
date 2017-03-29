@@ -34,7 +34,7 @@
       "image": "946170473186.dkr.ecr.us-east-1.amazonaws.com/libcluster:latest",
       "environment": ["PHOENIX_HOST"],
       "essential": true,
-      "memory": 4096,
+      "memory": 2048,
       "portMappings": [
         {
           "hostPort": 4369,

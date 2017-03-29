@@ -20,6 +20,21 @@ config :presence_chat, PresenceChat.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :libcluster,
+  topologies: [
+    example: [
+      # The selected clustering strategy. Required.
+      strategy: ClusterEC2.Strategy.Tags,
+      # Configuration for the provided strategy. Optional.
+      config: [
+        ec2_tagname: "elasticbeanstalk:environment-name",
+        ec2_tagvalue: &ClusterEC2.local_instance_tag_value/1,
+        app_prefix: "phoenix"
+      ],
+    ]
+  ]
+
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
